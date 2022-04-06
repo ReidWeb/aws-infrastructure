@@ -1,0 +1,32 @@
+{
+  "reidweb" : [
+	{
+	  "repoName": "test-cdk-app",
+	  "roleName": "cdk-test-app-deploy",
+	  "branches": [
+		{
+		  "branch": "main",
+		  "accountId": "857501034047"
+		},
+		{
+		  "branch": "main",
+		  "accountId": "452198079332"
+		}
+	  ]
+	},
+	{
+	  "repoName": "gatsby-site",
+	  "roleName": "reidweb-com-deploy",
+	  "branches": [
+		{
+		  "branch": "main",
+		  "accountId": "857501034047"
+		},
+		{
+		  "branch": "main",
+		  "accountId": "452198079332"
+		}
+	  ]
+	}
+  ]
+}
