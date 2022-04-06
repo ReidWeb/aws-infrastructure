@@ -1,0 +1,32 @@
+# .github/workflows/deployment.yaml
+name: Deploy to Target Account
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: reidweb-dev
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Pull repository
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        working-directory: ./target-account
+        run: npm install
+      - name: Assume deployer role
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
+          aws-region: eu-west-1
+      - name: Deploy the application
+        working-directory: ./target-account
+        env:
+          INFRASTRUCTURE_ACCOUNT_ID: ${{ secrets.INFRASTRUCTURE_ACCOUNT_ID }}
+          APPLICATION_ACCOUNT_ID: ${{ secrets.APPLICATION_ACCOUNT_ID }}
+        run: npm run deploy:cicd
