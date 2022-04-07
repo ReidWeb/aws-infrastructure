@@ -22,7 +22,7 @@ jobs:
       - name: Assume deployer role
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
+          role-to-assume: arn:aws:iam::${{ secrets.INFRASTRUCTURE_ACCOUNT_ID }}:role/github-actions/${{ secrets.APPLICATION_ACCOUNT_ID }}-reidweb-aws-infrastructure-main-deployment-role
           aws-region: eu-west-1
       - name: Deploy the application
         working-directory: ./target-account

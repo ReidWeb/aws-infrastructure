@@ -1,8 +1,8 @@
 {
   "reidweb" : [
 	{
-	  "repoName": "test-cdk-app",
-	  "roleName": "cdk-test-app-deploy",
+	  "repoName": "aws-infrastructure",
+	  "roleName": "cdk-stack-deploy",
 	  "branches": [
 		{
 		  "branch": "main",
