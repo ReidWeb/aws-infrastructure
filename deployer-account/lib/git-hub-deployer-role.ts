@@ -18,7 +18,8 @@ export class GitHubDeployerRole extends Role {
 			assumedBy: new WebIdentityPrincipal(
 				props.oidcProvider.openIdConnectProviderArn,
 				{
-					StringLike: {
+					"ForAllValues:StringEquals": {
+						"token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
 						"token.actions.githubusercontent.com:sub":
 						// Notice the `ref:refs`. The `s` in the second `ref` is important!
 							`repo:${props.gitHubUsername}/${props.gitHubRepo}:ref:refs/heads/${props.gitHubBranch}`
