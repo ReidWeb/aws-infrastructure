@@ -2,19 +2,15 @@ import { Stack, StackProps, aws_iam } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import IRepoMapping from "./config/IRepoMapping";
 import {GitHubDeployerRole} from "./git-hub-deployer-role";
+import {GithubActionsIdentityProvider, GithubActionsRole} from 'aws-cdk-github-oidc';
+import {Effect, Policy} from "aws-cdk-lib/aws-iam";
+
 
 export class DeployerAccountStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-	  const gitHubOIDCProvider = new aws_iam.OpenIdConnectProvider(
-		  this,
-		  "gitHubOIDCProvider",
-		  {
-			  url: "https://token.actions.githubusercontent.com",
-			  clientIds: ["sts.amazonaws.com"]
-		  }
-	  );
+	  const provider = new GithubActionsIdentityProvider(this, 'GithubProvider');
 
 	  const username = "reidweb";
 	  const repoMappings : IRepoMapping[] = scope.node.tryGetContext(username)
@@ -24,7 +20,7 @@ export class DeployerAccountStack extends Stack {
 				  gitHubBranch: branch.branch,
 				  gitHubUsername: username,
 				  gitHubRepo: repo.repoName,
-				  oidcProvider: gitHubOIDCProvider,
+				  oidcProvider: provider,
 				  targetAccountId: branch.accountId,
 				  targetAccountRole: repo.roleName
 			  })

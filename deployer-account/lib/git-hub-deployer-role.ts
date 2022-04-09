@@ -33,7 +33,7 @@ export class GitHubDeployerRole extends Role {
 						new PolicyStatement({
 							effect: Effect.ALLOW,
 							actions: ["sts:AssumeRole"],
-							resources: [`arn:aws:iam::${props.targetAccountId}:role/${props.targetAccountRole}`]
+							resources: [`arn:aws:iam::${props.targetAccountId}:role/*`]
 						})
 					]
 				})
