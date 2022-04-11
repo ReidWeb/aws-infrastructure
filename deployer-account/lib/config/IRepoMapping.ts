@@ -1,5 +1,5 @@
 interface IBranchMapping {
-	branch: string,
+	environmentName: string,
 	accountId: string
 }
 

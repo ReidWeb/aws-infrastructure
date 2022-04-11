@@ -12,14 +12,14 @@ export class DeployerAccountStack extends Stack {
 
 	  const provider = new GithubActionsIdentityProvider(this, 'GithubProvider');
 
-	  const username = "reidweb";
+	  const username = "ReidWeb"; //Casing is important
 	  const repoMappings : IRepoMapping[] = scope.node.tryGetContext(username)
 	  repoMappings.forEach(repo => {
 		  repo.branches.forEach(branch => {
-			  new GitHubDeployerRole(this, `${repo.repoName}-${branch.branch}-${branch.accountId}-role`, {
-				  gitHubBranch: branch.branch,
+			  new GitHubDeployerRole(this, `${repo.repoName}-${branch.environmentName}-${branch.accountId}-role`, {
 				  gitHubUsername: username,
 				  gitHubRepo: repo.repoName,
+				  environmentName: branch.environmentName,
 				  oidcProvider: provider,
 				  targetAccountId: branch.accountId,
 				  targetAccountRole: repo.roleName

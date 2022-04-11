@@ -6,7 +6,7 @@ export interface GitHubDeployerRoleProps {
 	oidcProvider: IOpenIdConnectProvider,
 	gitHubUsername: string,
 	gitHubRepo: string,
-	gitHubBranch: string,
+	environmentName: string,
 	targetAccountId: string,
 	targetAccountRole: string
 }
@@ -21,20 +21,19 @@ export class GitHubDeployerRole extends Role {
 					"ForAllValues:StringEquals": {
 						"token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
 						"token.actions.githubusercontent.com:sub":
-						// Notice the `ref:refs`. The `s` in the second `ref` is important!
-							`repo:${props.gitHubUsername}/${props.gitHubRepo}:ref:refs/heads/${props.gitHubBranch}`
+							`repo:${props.gitHubUsername}/${props.gitHubRepo}:environment:${props.environmentName}`
 					}
 				}
 			),
-			path : `/github-actions/`,
-			roleName: `${props.targetAccountId}-${props.gitHubUsername}-${props.gitHubRepo}-${props.gitHubBranch}-deployment-role`,
+			path : `/github-actions/${props.gitHubUsername}/`,
+			roleName: `${props.gitHubRepo}-${props.environmentName}-deployment-role`,
 			inlinePolicies: {
 				allowAssumeOnAccountB: new PolicyDocument({
 					statements: [
 						new PolicyStatement({
 							effect: Effect.ALLOW,
 							actions: ["sts:AssumeRole"],
-							resources: [`arn:aws:iam::${props.targetAccountId}:role/*`]
+							resources: [`arn:aws:iam::${props.targetAccountId}:role/*`] //TODO: Must tighten this up
 						})
 					]
 				})

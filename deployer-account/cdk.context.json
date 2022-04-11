@@ -1,16 +1,16 @@
 {
-  "reidweb" : [
+  "ReidWeb" : [
 	{
 	  "repoName": "aws-infrastructure",
 	  "roleName": "cdk-stack-deploy",
 	  "branches": [
 		{
-		  "branch": "main",
-		  "accountId": "857501034047"
+		  "accountId": "857501034047",
+		  "environmentName": "reidweb-dev"
 		},
 		{
-		  "branch": "main",
-		  "accountId": "452198079332"
+		  "accountId": "452198079332",
+		  "environmentName": "reidweb-non-prod"
 		}
 	  ]
 	},
@@ -19,12 +19,12 @@
 	  "roleName": "reidweb-com-deploy",
 	  "branches": [
 		{
-		  "branch": "main",
-		  "accountId": "857501034047"
+		  "accountId": "857501034047",
+		  "environmentName": "dev"
 		},
 		{
-		  "branch": "main",
-		  "accountId": "452198079332"
+		  "accountId": "452198079332",
+		  "environmentName" : "non-prod"
 		}
 	  ]
 	}
