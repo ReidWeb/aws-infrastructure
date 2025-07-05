@@ -1,0 +1,154 @@
+
+{
+  "Resources": {
+    "CloudFormationCrossAccountRoleAF640A62": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "cloudformation.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": "*",
+                  "Effect": "Allow",
+                  "Resource": "*"
+                }
+              ],
+              "Version": "2012-10-17"
+            },
+            "PolicyName": "GrantCloudFormationFullAccess"
+          }
+        ],
+        "RoleName": "CloudFormationCrossAccountRole"
+      },
+      "Metadata": {
+        "aws:cdk:path": "TargetAccountStack/CloudFormationCrossAccountRole/Resource"
+      }
+    },
+    "ActionsCrossAccountRole5AAB81E6": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::452515633987:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "TargetAccountStack/ActionsCrossAccountRole/Resource"
+      }
+    },
+    "ActionsCrossAccountPermissionPolicy2EC99C8E": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "iam:PassRole",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "CloudFormationCrossAccountRoleAF640A62",
+                  "Arn"
+                ]
+              }
+            },
+            {
+              "Action": [
+                "cloudformation:CreateChangeSet",
+                "cloudformation:DeleteStack",
+                "cloudformation:DescribeChangeSet",
+                "cloudformation:DescribeStackEvents",
+                "cloudformation:DescribeStackResource",
+                "cloudformation:DescribeStacks",
+                "cloudformation:ExecuteChangeSet",
+                "cloudformation:GetTemplate",
+                "cloudformation:GetTemplateSummary"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            },
+            {
+              "Action": [
+                "s3:DeleteObject",
+                "s3:GetBucket*",
+                "s3:GetObject*",
+                "s3:List*",
+                "s3:PutObject*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                "arn:aws:s3:::reidweb-deploy-eu-west-1",
+                "arn:aws:s3:::reidweb-deploy-eu-west-1/*"
+              ]
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "ActionsCrossAccountPermission",
+        "Roles": [
+          {
+            "Ref": "ActionsCrossAccountRole5AAB81E6"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "TargetAccountStack/ActionsCrossAccountPermissionPolicy/Resource"
+      }
+    },
+    "CDKMetadata": {
+      "Type": "AWS::CDK::Metadata",
+      "Properties": {
+        "Analytics": "v2:deflate64:H4sIAAAAAAAA/yWKQQqFIBQAz9JeXyZtWneAwg7wMTN4ZRo9/RHR3aNazQyMBClKEJneiZth5g57OLuozcz0Tj/UC5wqOMvq0b9sg0NzPPnZxZSlkDbzLk2Ka4oX82GwMFH+lwKKCmQ2ESLfko+4WFAfb7Hktfl8AAAA"
+      },
+      "Metadata": {
+        "aws:cdk:path": "TargetAccountStack/CDKMetadata/Default"
+      }
+    }
+  },
+  "Outputs": {
+    "CloudFormationCrossAccountRoleOutput": {
+      "Description": "ARN of the IAM Role (CloudFormationCrossAccountRole)",
+      "Value": {
+        "Fn::GetAtt": [
+          "CloudFormationCrossAccountRoleAF640A62",
+          "Arn"
+        ]
+      },
+      "Export": {
+        "Name": "CloudFormationCrossAccountRole"
+      }
+    },
+    "ActionsCrossAccountRoleOutput": {
+      "Description": "ARN of the IAM Role (ActionsCrossAccountRole)",
+      "Value": {
+        "Fn::GetAtt": [
+          "ActionsCrossAccountRole5AAB81E6",
+          "Arn"
+        ]
+      },
+      "Export": {
+        "Name": "ActionsCrossAccountRole"
+      }
+    }
+  }
+}
