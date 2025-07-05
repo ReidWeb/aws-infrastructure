@@ -42,5 +42,9 @@
         }
       ]
     }
+  ],
+  "acknowledged-issue-numbers": [
+    34892,
+    34892
   ]
 }
