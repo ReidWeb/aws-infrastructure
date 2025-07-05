@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { TargetAccountStack } from '../lib/target-account-stack';
+import { TargetAccountStack } from '../lib/target_account_stack';
 
 const app = new cdk.App();
 new TargetAccountStack(app, 'TargetAccountStack', {
