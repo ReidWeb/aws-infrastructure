@@ -1,0 +1,12 @@
+
+{
+  "targetAccountConfig": {
+    "codePipelineCrossAccountRoleName": "CodePipelineCrossAccountRole",
+    "cloudFormationCrossAccountRoleName": "CloudFormationCrossAccountRole",
+    "toolAccountId": "452515633987",
+    "artifactsBucketArn": "arn:aws:s3:::reidweb-deploy-eu-west-1"
+  },
+  "acknowledged-issue-numbers": [
+    34892
+  ]
+}
