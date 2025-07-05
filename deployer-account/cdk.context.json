@@ -1,32 +1,46 @@
 {
-  "ReidWeb" : [
-	{
-	  "repoName": "aws-infrastructure",
-	  "roleName": "cdk-stack-deploy",
-	  "branches": [
-		{
-		  "accountId": "857501034047",
-		  "environmentName": "reidweb-dev"
-		},
-		{
-		  "accountId": "452198079332",
-		  "environmentName": "reidweb-non-prod"
-		}
-	  ]
-	},
-	{
-	  "repoName": "gatsby-site",
-	  "roleName": "reidweb-com-deploy",
-	  "branches": [
-		{
-		  "accountId": "857501034047",
-		  "environmentName": "dev"
-		},
-		{
-		  "accountId": "452198079332",
-		  "environmentName" : "non-prod"
-		}
-	  ]
-	}
+  "ReidWeb": [
+    {
+      "repoName": "aws-infrastructure",
+      "roleName": "cdk-stack-deploy",
+      "branches": [
+        {
+          "accountId": "857501034047",
+          "environmentName": "reidweb-dev"
+        },
+        {
+          "accountId": "452198079332",
+          "environmentName": "reidweb-non-prod"
+        }
+      ]
+    },
+    {
+      "repoName": "gatsby-site",
+      "roleName": "reidweb-com-deploy",
+      "branches": [
+        {
+          "accountId": "857501034047",
+          "environmentName": "dev"
+        },
+        {
+          "accountId": "452198079332",
+          "environmentName": "non-prod"
+        }
+      ]
+    },
+    {
+      "repoName": "keyboard-inventory",
+      "roleName": "keyboard-inventory-deploy",
+      "branches": [
+        {
+          "accountId": "857501034047",
+          "environmentName": "dev"
+        },
+        {
+          "accountId": "452198079332",
+          "environmentName": "non-prod"
+        }
+      ]
+    }
   ]
 }
