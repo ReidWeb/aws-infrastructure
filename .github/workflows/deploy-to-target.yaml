@@ -21,7 +21,7 @@ jobs:
         working-directory: ./target-account
         run: npm install
       - name: Assume deployer role
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::${{ secrets.INFRASTRUCTURE_ACCOUNT_ID }}:role/github-actions/${{ github.event.repository.full_name }}-reidweb-dev-deployment-role
           aws-region: eu-west-1
